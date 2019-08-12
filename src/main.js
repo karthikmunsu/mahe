@@ -14,6 +14,8 @@ Vue.use(BootstrapVue);
 
 let app = '';
 
+
+
 firebase.initializeApp(firebaseConfig);
 
 firebase.auth().onAuthStateChanged(() => {

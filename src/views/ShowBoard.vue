@@ -9,6 +9,7 @@
         <template slot="header">
           {{board.title}}
         </template>
+        <img style="height:200px;width:200px" :src="board.filename" />
         <template slot="lead">
           Name: {{board.name}}<br>
           Date Of Birth: {{board.dob}}<br>
@@ -43,6 +44,9 @@ export default {
       if (doc.exists) {
         this.key = doc.id;
         this.board = doc.data();
+        firebase.storage().ref().child('images/'+doc.data().filename).getDownloadURL()
+          .then(res => { this.board.filename = res })
+          .catch(err => err);
       } else {
         alert("No such document!");
       }
